@@ -5,13 +5,24 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        n = len(nums)
+        countdict = dict()
+        rnums = []
+        for num in nums:
+            if num in countdict.keys():
+                if countdict[num]!=4:
+                    countdict[num] += 1
+                    rnums.append(num)
+            else:
+                countdict[num] = 1
+                rnums.append(num)
+
         sumdict = dict([])
         result = set([])
+        n = len(rnums)
 
         for a in range(n):
             for b in range(a+1, n):
-                sum = nums[a]+nums[b]
+                sum = rnums[a]+rnums[b]
                 if sum in sumdict.keys():
                     sumdict[sum].add((a,b))
                 else:
@@ -22,8 +33,10 @@ class Solution(object):
             if sum2 in sumdict.keys():
                 for a, b in sumdict[sum1]:
                     for c, d in sumdict[sum2]:
+                        ans = [rnums[a], rnums[b], rnums[c], rnums[d]]
+                        ans.sort()
                         if b<c:
-                            result.add((nums[a], nums[b], nums[c], nums[d]))
+                            result.add(tuple(ans))
         
         result_ = []
         for n1, n2, n3, n4 in result:
