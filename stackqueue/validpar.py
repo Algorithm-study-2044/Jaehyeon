@@ -8,6 +8,8 @@ class Solution(object):
         for c in s:
             if c == '(' or c == '{' or c=='[':
                 bracstack.append(c)
+            elif not bracstack:
+                return False
             elif c==')':
                 if bracstack.pop() != '(':
                     return False
