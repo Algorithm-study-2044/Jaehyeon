@@ -9,7 +9,10 @@ class Solution(object):
         n = len(mat[0])
         delidxset = set([])
         result = []
-        for j in range(n):
+
+        for i in range(m):
+            mat[i].append(0)
+        for j in range(n+1):
             for i in range(m):
                 if not i in delidxset and not mat[i][j]:
                     delidxset.add(i)
